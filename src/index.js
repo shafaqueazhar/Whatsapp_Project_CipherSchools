@@ -1,14 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+const appID = "214387361da3bcd4";
+const region = "us";
+const appSetting = new CometChat.AppSettingsBuilder()
+  .subscribePresenceForAllUsers()
+  .setRegion(region)
+  .build();
+CometChat.init(appID, appSetting).then(
+  () => {
+    console.log("Initialization completed successfully");
+    // You can now call login function.
+  },
+  (error) => {
+    console.log("Initialization failed with error:", error);
+    // Check the reason for error and take appropriate action.
+  }
+);
+
+ReactDOM.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
